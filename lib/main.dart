@@ -3,7 +3,6 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,97 +14,74 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.white
       ),
-      home: RandomWords(),
+      home: DisplayPage(),
     );
   }
 }
 
-class RandomWords extends StatefulWidget {
+class DisplayPage extends StatefulWidget {
   @override
-  _RandomWordsState createState() => _RandomWordsState();
+  _DisplayPageState createState() => _DisplayPageState();
 }
 
-class _RandomWordsState extends State<RandomWords> {
-  final _suggestions = <WordPair>[];
-  final _saved = Set<WordPair>();
-  final _biggerFont = TextStyle(fontSize: 18.0);
+class _DisplayPageState extends State<DisplayPage> {
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text(
+      'List of Bits',
+      style: optionStyle,
+    ),
+    Text(
+      'List of Sets',
+      style: optionStyle,
+    ),
+    Text(
+      'Your Gig History',
+      style: optionStyle,
+    ),
+    Text(
+      'Account Settings',
+      style: optionStyle,
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Startup Name Generator'),
-        actions: [
-          IconButton(icon: Icon(Icons.list), onPressed: _pushSaved)
+      appBar: AppBar(),
+      body: _widgetOptions.elementAt(_selectedIndex),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        unselectedItemColor: Colors.grey.withOpacity(.60),
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.maps_ugc),
+            label: 'Bits',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list_alt),
+            label: 'Sets',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.margin),
+            label: 'Gig History',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: 'Account',
+          ),
         ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
       ),
-      body: _buildSuggestions(),
     );
   }
 
-  void _pushSaved() {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (BuildContext context) {
-          final tiles = _saved.map(
-            (WordPair pair) {
-              return ListTile(
-                title: Text(
-                  pair.asPascalCase,
-                  style: _biggerFont,
-                ),
-              );
-            },
-          );
-          final divided = ListTile.divideTiles(
-            context: context,
-            tiles: tiles,
-          ).toList();
-
-          return Scaffold(
-            appBar: AppBar(
-              title: Text('Saved Suggestions'),
-            ),
-            body: ListView(children: divided),
-          );
-        }
-      )
-    );
-  }
-
-  Widget _buildRow(WordPair pair) {
-    final alreadySaved = _saved.contains(pair);
-    return ListTile(
-      title: Text(
-        pair.asPascalCase,
-        style: _biggerFont,
-      ),
-      trailing: Icon(
-        alreadySaved ? Icons.favorite : Icons.favorite_border,
-        color: alreadySaved ? Colors.red : null
-      ),
-      onTap: () {
-        setState(() {
-          if (alreadySaved) {
-            _saved.remove(pair);
-          } else {
-            _saved.add(pair);
-          }
-        });
-      }
-    );
-  }
-
-  Widget _buildSuggestions() {
-    return ListView.builder(
-        padding: EdgeInsets.all(16.0),
-        itemBuilder: /*1*/ (context, i) {
-          if (i.isOdd) return Divider(); /*2*/
-
-          final index = i ~/ 2; /*3*/
-          if (index >= _suggestions.length) {
-            _suggestions.addAll(generateWordPairs().take(10)); /*4*/
-          }
-          return _buildRow(_suggestions[index]);
-        });
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 }
