@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:jokebook/bits_list/new_bit.dart';
 
 class BitsListPage extends StatefulWidget {
   BitsListPage({Key key}) : super(key: key);
@@ -13,6 +14,17 @@ class BitsListPageState extends State<BitsListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add_box),
+            tooltip: 'Next page',
+            onPressed: () {
+              openPage(context);
+            },
+          ),
+        ],
+      ),
       body: new Container(
       child: new Center(
         child: new FutureBuilder(
@@ -33,4 +45,12 @@ class BitsListPageState extends State<BitsListPage> {
       ),
     ));
   }
+}
+
+void openPage(BuildContext context) {
+  Navigator.push(context, MaterialPageRoute(
+    builder: (BuildContext context) {
+      return new NewBitPage();
+    },
+  ));
 }
