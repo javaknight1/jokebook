@@ -117,7 +117,6 @@ class NewBitPageState extends State<NewBitPage> {
   }
 
   _showDialog(BuildContext context) {
-    Scaffold.of(context)
-        .showSnackBar(SnackBar(content: Text('Submitting form')));
+    Navigator.pop(context);
   }
 }
