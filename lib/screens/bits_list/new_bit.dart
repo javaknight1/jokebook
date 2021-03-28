@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import '../models/bit.dart';
+import '../../models/bit.dart';
 
 class NewBitPage extends StatefulWidget {
   NewBitPage({Key key}) : super(key: key);

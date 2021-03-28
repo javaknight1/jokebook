@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jokebook/home/home_screen.dart';
+import 'package:jokebook/screens/home/home_screen.dart';
 
 void main() => runApp(MyApp());
 

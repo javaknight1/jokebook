@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:jokebook/bits_list/new_bit.dart';
+import 'package:jokebook/screens/bits_list/new_bit.dart';
 
 class BitsListPage extends StatefulWidget {
   BitsListPage({Key key}) : super(key: key);

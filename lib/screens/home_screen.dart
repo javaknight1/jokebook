@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:jokebook/bits_list/bits_list.dart';
+import 'package:jokebook/screens/bits_list/bits_list.dart';
 
 class HomePage extends StatefulWidget {
   @override
