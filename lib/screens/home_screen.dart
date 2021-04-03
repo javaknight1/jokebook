@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:jokebook/screens/bits_list/bits_list.dart';
+import 'package:jokebook/screens/sets_list/sets_list.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,10 +16,7 @@ class _HomePageState extends State<HomePage> {
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   final _widgetOptions = [
     new BitsListPage(),
-    Text(
-      'List of Sets',
-      style: optionStyle,
-    ),
+    new SetsListPage(),
     Text(
       'Your Gig History',
       style: optionStyle,
@@ -62,30 +60,6 @@ class _HomePageState extends State<HomePage> {
         onTap: _onItemTapped,
       ),
     );
-  }
-
-  Widget _myListView() {
-
-    // backing data
-    final europeanCountries = ['Albania', 'Andorra', 'Armenia', 'Austria', 
-      'Azerbaijan', 'Belarus', 'Belgium', 'Bosnia and Herzegovina', 'Bulgaria',
-      'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Estonia', 'Finland',
-      'France', 'Georgia', 'Germany', 'Greece', 'Hungary', 'Iceland', 'Ireland',
-      'Italy', 'Kazakhstan', 'Kosovo', 'Latvia', 'Liechtenstein', 'Lithuania',
-      'Luxembourg', 'Macedonia', 'Malta', 'Moldova', 'Monaco', 'Montenegro',
-      'Netherlands', 'Norway', 'Poland', 'Portugal', 'Romania', 'Russia',
-      'San Marino', 'Serbia', 'Slovakia', 'Slovenia', 'Spain', 'Sweden', 
-      'Switzerland', 'Turkey', 'Ukraine', 'United Kingdom', 'Vatican City'];
-
-    return ListView.builder(
-      itemCount: europeanCountries.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(europeanCountries[index]),
-        );
-      },
-    );
-
   }
 
   void _onItemTapped(int index) {

@@ -1,4 +1,5 @@
 class Bit {
+  String id = '';
   String title = '';
   String description = '';
   Type type = Type.Bit;
